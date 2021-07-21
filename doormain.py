@@ -4,6 +4,11 @@ import json
 import requests
 from discord.ext import commands, tasks
 
+intents = discord.Intents.default()
+intents.typing = True
+intents.presences = True
+intents.members = True
+
 client = commands.Bot(command_prefix = "-")
 client.remove_command('help')
 
