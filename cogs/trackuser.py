@@ -48,14 +48,15 @@ class trackuser(commands.Cog):
             )
             await guildowner.send(embed=embed)
         else:
-            embed = discord.Embed(
-                title = f"에러 | 화이트리스트가 되지 않은 서버({guildname})",
-                description = f"본 서버는 도어맨을 구매한 기록이 없는 것으로 보입니다. 봇을 우선적으로 구매해주세요.\n저는 이만 서버를 나가겠습니다! 추후에 다시 초대해주세요!",
-                color = discord.Color.from_rgb(255, 255, 0)
-            )
-            await guildowner.send(embed=embed)
+            if guildid != 792306366906630154:
+                embed = discord.Embed(
+                    title = f"에러 | 화이트리스트가 되지 않은 서버({guildname})",
+                    description = f"본 서버는 도어맨을 구매한 기록이 없는 것으로 보입니다. 봇을 우선적으로 구매해주세요.\n저는 이만 서버를 나가겠습니다! 추후에 다시 초대해주세요!",
+                    color = discord.Color.from_rgb(255, 255, 0)
+                )
+                await guildowner.send(embed=embed)
 
-            await guild.leave()
+                await guild.leave()
 
 
 
