@@ -8,6 +8,7 @@ intents = discord.Intents.default()
 intents.typing = True
 intents.presences = True
 intents.members = True
+intents.guilds = True
 
 client = commands.Bot(command_prefix = "-")
 client.remove_command('help')
