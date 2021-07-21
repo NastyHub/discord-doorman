@@ -1,0 +1,16 @@
+{
+    "purchasemethod" : {
+        "example": {
+            "0" : "robux",
+            "1" : "culture",
+            "2" : "bank"
+        },
+
+        "method": 0
+    },
+        
+    "serverid" : 123,
+    "purchasediscordid" : 123,
+    "purchaserobloxid" : 123
+
+}

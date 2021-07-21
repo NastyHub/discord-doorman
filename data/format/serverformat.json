@@ -1,0 +1,31 @@
+{
+    "serverid": 0,
+    "ownerid": 0,
+    "logchannel" : {
+        "joinleave" : 12345,
+        "serverpunish" : 12345,
+        "grouppunish" : 12345
+    },
+
+    "joinlimit" : 0,
+
+    "serverpunish" : {
+        "example" : {
+            "0" : "ignore",
+            "1" : "kick",
+            "2" : "ban"
+        },
+        "method" : 0
+    },
+
+    "grouppunish" : {
+        "example" : {
+            "0" : "ignore",
+            "1" : "demote",
+            "2" : "kick"
+        },
+        "method" : 0,
+        "demoterank" : 0
+    }
+
+}
