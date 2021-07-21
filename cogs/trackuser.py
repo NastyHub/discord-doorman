@@ -38,14 +38,24 @@ class trackuser(commands.Cog):
         guildowner = guild.owner
         guildname = guild.name
 
-        '''
-        embed = discord.Embed(
-            title = "에러 | 서버 연동된 상태",
-            description = f"❗ 현재 이미 {pastgroupid}로 연동된 그룹이 있습니다. 만약 진행하신다면 수동으로 연결했던 모든 역할들이 사라질 겁니다. 계속하시겠습니까?\n'예', '아니요'",
-            color = discord.Color.from_rgb(255, 255, 0)
-        )
-        await ctx.send(embed=embed)
-        '''
+        if checkwhitelist(guildid) == True:
+            embed = discord.Embed(
+                title = "성공 | 봇 추가 완료",
+                description = f"안녕하세요! 도어맨을 구매해주셔서 진심으로 감사합니다. **서버**에서 `-도움말` 명령어를 통해 저를 더 알아가 볼까요?",
+                color = discord.Color.from_rgb(0, 255, 0)
+            )
+            await guildowner.send(embed=embed)
+        else:
+            embed = discord.Embed(
+                title = "에러 | 화이트리스트가 되지 않은 서버",
+                description = f"본 서버는 도어맨을 구매한 기록이 없는 것으로 보입니다. 봇을 우선적으로 구매해주세요.\n저는 이만 서버를 나가겠습니다! 추후에 다시 초대해주세요!",
+                color = discord.Color.from_rgb(255, 255, 0)
+            )
+            await guildowner.send(embed=embed)
+
+            await guild.leave()
+
+
 
 def setup(client):
     client.add_cog(trackuser(client))
