@@ -3,7 +3,8 @@
         "example": {
             "0" : "robux",
             "1" : "culture",
-            "2" : "bank"
+            "2" : "bank",
+            "3" : "owner"
         },
 
         "method": 0
