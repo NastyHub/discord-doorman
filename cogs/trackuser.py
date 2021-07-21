@@ -22,7 +22,7 @@ class trackuser(commands.Cog):
         print(printme)
 
         print("Initializing..")
-        print(f"ID: {self.client.id}")
+        print(f"ID: {self.client.user.id}")
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
