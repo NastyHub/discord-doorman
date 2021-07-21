@@ -2,6 +2,13 @@ import discord
 from discord.ext import commands
 import os
 
+def checkwhitelist(serverid):
+    whitelistpath = "data/client"
+    if os.path.isfile(whitelistpath+f"/{serverid}"):
+        return True
+    else:
+        return False
+
 class trackuser(commands.Cog):
 
     def __init__(self, client):
@@ -24,6 +31,14 @@ class trackuser(commands.Cog):
 
         print("Initializing..")
         print(f"ID: {self.client.user.id}")
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        server = member.guild
+        memberid = member.id
+
+        if checkwhitelist(server.id) == True:
+            print("ok.")
 
 
 
