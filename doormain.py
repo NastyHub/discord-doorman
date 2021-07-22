@@ -10,7 +10,7 @@ intents.presences = True
 intents.members = True
 intents.guilds = True
 
-client = commands.Bot(command_prefix = "-")
+client = commands.Bot(command_prefix = "-", intents=intents)
 client.remove_command('help')
 
 mycookie = "cookie"
