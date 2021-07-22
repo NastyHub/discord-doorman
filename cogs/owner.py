@@ -2,6 +2,9 @@ import discord
 import os
 from discord.ext import commands
 import json
+import requests
+
+req = requests.Session()
 
 ownerid = 631441731350691850
 
@@ -32,6 +35,7 @@ class owner(commands.Cog):
                     description = f"해당 서버는 도어맨을 구매하였습니다.",
                     color = discord.Color.from_rgb(255, 255, 0)
                 )
+                embed.set_footer(text="NastyCore, The Next Innovation")
                 await ctx.send(embed=embed)
             else:
                 os.mkdir(serverpath)
@@ -66,10 +70,19 @@ class owner(commands.Cog):
                     description = f"해당 서버를 수동으로 화이트리스팅 했습니다.",
                     color = discord.Color.from_rgb(0, 255, 0)
                 )
+                embed.set_footer(text="NastyCore, The Next Innovation")
                 await ctx.send(embed=embed)
 
         else:
             await ctx.send("no.")
+
+    @commands.command()
+    async def apitest(self, ctx, memberid):
+        if checkowner(ctx.author.id):
+            r = req.get(f"http://127.0.0.1:8000/verifydb/{memberid}").text
+
+            await ctx.send(r)
+
 
 def setup(client):
     client.add_cog(owner(client))

@@ -2,9 +2,9 @@
     "serverid": 0,
     "ownerid": 0,
     "logchannel" : {
-        "joinleave" : 12345,
-        "serverpunish" : 12345,
-        "grouppunish" : 12345
+        "joinleave" : 0,
+        "serverpunish" : 0,
+        "grouppunish" : 0
     },
 
     "joinlimit" : 0,
@@ -26,6 +26,10 @@
         },
         "method" : 0,
         "demoterank" : 0
-    }
+    },
+
+    "whitelist" : [
+        
+    ]
 
 }
