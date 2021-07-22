@@ -26,7 +26,7 @@ class owner(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def forceset(self, ctx, serverid, ownerid):
+    async def forceset(self, ctx, serverid, ownerid, groupid):
         serverpath = "data/client/" + f"{serverid}"
         if checkowner(ctx.author.id) == True:
             if os.path.isfile(serverpath):

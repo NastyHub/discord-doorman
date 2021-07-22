@@ -6,6 +6,10 @@ import json
 
 req = requests.Session()
 
+mycookie = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_D8A98EF3D11D776EFEB954D8E2896629982ED2B813D55AE6AE438ECE1BA1F622A22B0FECE15437A59194630E9F74A79AE1F9CD898DC03BA2143EC35FF840E956BE2FC1E45442BE0B0CA02E282F00E7CAC53B46F5A62F279E02F3DAF9A184A3BBE7FFFA27B599590DD6DF0136F5C378B61BE0C9511BD5CFCAA430655F88312FA37805E72B99A8EC64045AAD223A79E67CBDB374D8A4B86ABA4FF6085260FC9AB456926F1080B1777416E727C8351FB783EFD73BD0E692533161D6165AC28AC87316AF38083DE6CCE4983E8AC32F9203F22948214B7B8A2864D8CBDB2C7EDC355D9FA5EEA16706C6A5B3CFD8983FB5A99D533DA0419111CD192084415870E86FC23B96BF3CDA7457F7C4F2CECE59217F6B01F66399E71486022AD2995DCEF0174612D60888A60D2947C0E4DEDE97EA11B0F5952544CCC43FE712172ABEC85301F3F0D9AF7A91FB0E00D0776C2900691793FBE429955B95E3A078BC61CE6891666AD188ABCB"
+req = requests.Session()
+req.cookies[".ROBLOSECURITY"] = mycookie
+
 def checkwhitelist(serverid):
     whitelistpath = "data/client"
     if os.path.isdir(whitelistpath+f"/{serverid}"):
@@ -155,6 +159,7 @@ class trackuser(commands.Cog):
                             embed.set_footer(text="NastyCore, The Next Innovation")
                             embed.set_footer(text="NastyCore, The Next Innovation")
                             await spunishlog.send(embed=embed)
+                            await member.send(embed=embed)
                         except:
                             pass
 
@@ -170,17 +175,64 @@ class trackuser(commands.Cog):
                             embed.set_footer(text="NastyCore, The Next Innovation")
                             embed.set_footer(text="NastyCore, The Next Innovation")
                             await spunishlog.send(embed=embed)
+                            await member.send(embed=embed)
                         except:
                             pass
 
                     else:
                         pass
-        else:
-            print("not whitelisted.")
+
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
-        print("We're sorry to see you go!")
+        server = member.guild
+        memberid = member.id
+        membername = member.name
+        memberdiscrim = member.discriminator
+
+        if checkwhitelist(server.id) == True:
+            path = f"data/client/{server.id}"
+            memberpath = path+f"/user/{memberid}.json"
+
+            with open(path+"/serverformat.json") as f:
+                jsondata = json.load(f)
+                f.close()
+            joinlog = jsondata["logchannel"]["joinleave"]
+            grouppunishlog = jsondata["logchannel"]["grouppunish"]
+            gpunishmethod = jsondata["grouppunish"]["method"]
+            whitelist = jsondata["whitelist"]
+
+            if joinlog != 0:
+                join = discord.utils.get(self.client.get_all_channels(), id = int(joinlog))
+
+                embed = discord.Embed(
+                    title = f"유저가 서버를 퇴장하였습니다",
+                    color = discord.Color.from_rgb(255, 255, 0)
+                )
+                embed.add_field(name="유저", value=f"{membername}#{memberdiscrim}", inline=False)
+                embed.set_footer(text="NastyCore, The Next Innovation")
+
+                try:
+                    await join.send(embed=embed)
+                except:
+                    pass
+
+            if memberid not in whitelist:
+            
+                #Gets verified datas
+                r = req.get(f"http://127.0.0.1:8000/verifydb/{memberid}")
+                if r.text != "0":
+                    verified = r.text
+                
+                    r = req.get(f"https://api.roblox.com/users/{verified}").json()
+
+                    robloxname = r["Username"]
+
+                    if grouppunishlog != 0 and gpunishmethod != 0:
+                        
+
+                    
+
 
 def setup(client):
     client.add_cog(trackuser(client))

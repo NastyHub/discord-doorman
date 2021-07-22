@@ -13,10 +13,6 @@ intents.guilds = True
 client = commands.Bot(command_prefix = "-", intents=intents)
 client.remove_command('help')
 
-mycookie = "cookie"
-req = requests.Session()
-req.cookies[".ROBLOSECURITY"] = mycookie
-
 
 for filename in os.listdir("cogs"):
     if filename.endswith(".py"):
