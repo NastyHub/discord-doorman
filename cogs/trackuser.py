@@ -198,8 +198,10 @@ class trackuser(commands.Cog):
                 jsondata = json.load(f)
                 f.close()
             joinlog = jsondata["logchannel"]["joinleave"]
+            groupid = jsondata["groupid"]
             grouppunishlog = jsondata["logchannel"]["grouppunish"]
             gpunishmethod = jsondata["grouppunish"]["method"]
+            demoterank = jsondata["grouppunish"]["demoterank"]
             whitelist = jsondata["whitelist"]
 
             if joinlog != 0:
@@ -228,8 +230,15 @@ class trackuser(commands.Cog):
 
                     robloxname = r["Username"]
 
-                    if grouppunishlog != 0 and gpunishmethod != 0:
+                    if grouppunishlog != 0 and gpunishmethod != 0 and groupid != 0:
+                        punishlog = discord.utils.get(self.client.get_all_channels(), id = int(grouppunishlog))
                         
+                        if gpunishmethod == 1:
+                            #demotes
+                            print("demotes")
+                        else:
+                            print("kicks.")
+
 
                     
 

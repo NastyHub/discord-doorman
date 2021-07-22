@@ -60,6 +60,7 @@ class owner(commands.Cog):
                     f.close()
                 jsondata["serverid"] = serverid
                 jsondata["ownerid"] = ownerid
+                json["groupid"] = groupid
  
                 with open(serverpath+"/serverformat.json", "w") as f:
                     json.dump(jsondata, f, indent=2)
